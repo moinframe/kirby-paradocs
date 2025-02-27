@@ -1,0 +1,22 @@
+{
+    "name": "moinframe/kirby-paradocs",
+    "description": "Auto-generate beautiful documentation pages using markdown",
+    "license": "MIT",
+    "type": "kirby-plugin",
+    "version": "0.0.0",
+    "authors": [
+        {
+            "name": "Justus Kraft",
+            "email": "justus@moinfra.me"
+        }
+    ],
+    "require": {
+        "getkirby/composer-installer": "^1.1",
+        "getkirby/cms": "^4.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
+    }
+}

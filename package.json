@@ -1,0 +1,18 @@
+{
+  "name": "kirby-paradocs",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "release": "release-it"
+  },
+  "keywords": [],
+  "author": "Justus Kraft <justus@moinfra.me>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.5.0",
+  "devDependencies": {
+    "@release-it/bumper": "^7.0.1",
+    "@release-it/conventional-changelog": "^10.0.0",
+    "release-it": "^18.1.2"
+  }
+}
