@@ -10,7 +10,11 @@ The primary use case for this plugin is to easily provide documentation pages fo
 - (Optional) user authentication to restrict access
 - Provides frontend inspired by the Kirby Docs
 
+
 ## Installation
+
+> [!WARNING]
+  This plugin is still in development and should be considered alpha. It will change quite a bit before it reaches a stable version.
 
 ### Download
 
