@@ -48,4 +48,22 @@ class Options
     {
         return option('moinframe.kirby-paradocs.safelist', null);
     }
+
+    /**
+     * Check if the docs should be public
+     * @return bool
+     */
+    public static function public(): bool
+    {
+        return option('moinframe.kirby-paradocs.public', false);
+    }
+
+    /**
+     * Get the syntax highlighter to use
+     * @return string
+     */
+    public static function highlighter(): string
+    {
+        return option('moinframe.kirby-paradocs.highlighter', 'phiki');
+    }
 }

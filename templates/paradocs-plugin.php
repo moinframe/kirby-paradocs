@@ -2,7 +2,7 @@
 
 <?php if ($page->text()->isNotEmpty()): ?>
     <article class="text">
-        <?= $page->text()->kt() ?>
+        <?= $page->text() ?>
     </article>
 <?php endif ?>
 

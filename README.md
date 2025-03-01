@@ -9,12 +9,14 @@ The primary use case for this plugin is to easily provide documentation pages fo
 - Automatically generates documentation pages for all installed plugins
 - (Optional) user authentication to restrict access
 - Provides frontend inspired by the Kirby Docs
+- Configurable syntax highlighting with simple or enhanced options
 
 
 ## Installation
 
-> [!WARNING]
+> [!CAUTION]
   This plugin is still in development and should be considered alpha. It will change quite a bit before it reaches a stable version.
+
 
 ### Download
 
@@ -22,12 +24,16 @@ Download and copy this repository to `/site/plugins/kirby-paradocs`.
 
 ### Composer
 
-```
+```sh
+# Basic installation
 composer require moinframe/kirby-paradocs
+
+# With enhanced syntax highlighting
+composer require moinframe/kirby-paradocs phiki/phiki
 ```
 
 ### Git submodule
 
-```
+```sh
 git submodule add https://github.com/moinframe/kirby-paradocs.git site/plugins/kirby-paradocs
 ```

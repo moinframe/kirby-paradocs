@@ -14,7 +14,16 @@
         "getkirby/composer-installer": "^1.1",
         "getkirby/cms": "^4.6"
     },
+    "suggest": {
+        "phiki/phiki": "^1.1 - Enhanced syntax highlighting"
+    },
+    "autoload": {
+        "psr-4": {
+            "Moinframe\\Paradocs\\": "src/"
+        }
+    },
     "config": {
+        "optimize-autoloader": true,
         "allow-plugins": {
             "getkirby/composer-installer": true
         }

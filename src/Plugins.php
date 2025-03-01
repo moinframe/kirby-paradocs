@@ -43,7 +43,7 @@ class Plugins
     }
 
     /**
-     * Gett all plugins
+     * Get all plugins
      * @return array
      */
     public static function getAll(): array

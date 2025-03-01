@@ -7,7 +7,10 @@ use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
-
+use Moinframe\ParaDocs\Options;
+use Moinframe\ParaDocs\Page\IndexPage;
+use Moinframe\ParaDocs\Page\PluginPage;
+use Moinframe\ParaDocs\Markdown\Parser;
 
 class App
 {
@@ -90,12 +93,28 @@ class App
     }
 
     /**
+     * Create a parser
+     *
+     * @return Parser
+     */
+    private function createParser(): Parser
+    {
+        $parser = new Parser();
+
+        // Trigger hook to allow custom processors
+        kirby()->trigger('paradocs.parser.ready', ['parser' => $parser]);
+
+        return $parser;
+    }
+
+    /**
      * Create plugin root page
      */
     private function createPluginRootPage(array $plugin, Page $parent): PluginPage
     {
+        // Get parser with hooks applied
+        $parser = $this->createParser();
 
-        $parser = new MarkdownParser();
         $readmePath = $plugin['root'] . '/README.md';
         $parsed = ['content' => ''];
 
@@ -124,7 +143,9 @@ class App
     private function createChildPagesRecursively(Page $parent, array $structure, string $basePath): Page
     {
         $children = [];
-        $parser = new MarkdownParser();
+
+        // Get parser with hooks applied
+        $parser = $this->createParser();
 
         // First pass: Process index.md files for parent content
         if (isset($structure['index.md'])) {

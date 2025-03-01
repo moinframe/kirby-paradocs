@@ -1,17 +1,8 @@
 <?php
 
-use Kirby\Filesystem\F;
 use Kirby\Cms\App as Kirby;
 
-F::loadClasses([
-    'moinframe\\paradocs\\plugins' =>  '/src/Plugins/Plugins.php',
-    'moinframe\\paradocs\\markdownparser' =>  '/src/Markdown/Parser.php',
-    'moinframe\\paradocs\\app' =>  '/src/App/App.php',
-    'moinframe\\paradocs\\options' =>  '/src/Options/Options.php',
-    'moinframe\\paradocs\\routes' =>  '/src/Routes/Routes.php',
-    'moinframe\\paradocs\\indexpage' =>  '/src/Page/Index.php',
-    'moinframe\\paradocs\\pluginpage' =>  '/src/Page/Plugin.php',
-], __DIR__);
+@include_once __DIR__ . '/vendor/autoload.php';
 
 Kirby::plugin('moinframe/kirby-paradocs', [
     'routes' => Moinframe\ParaDocs\Routes::register(),
@@ -23,6 +14,14 @@ Kirby::plugin('moinframe/kirby-paradocs', [
     ],
     'snippets' => [
         'paradocs/menu' => __DIR__ . '/snippets/menu.php',
-        'paradocs/layout' => __DIR__ . '/snippets/layout.php'
+        'paradocs/layout' => __DIR__ . '/snippets/layout.php',
+        'paradocs/alert' => __DIR__ . '/snippets/alert.php',
+        'paradocs/codeblock' => __DIR__ . '/snippets/codeblock.php'
+    ],
+    'hooks' => [
+        'paradocs.parser.ready' => function ($parser) {
+            // This hook is triggered when a parser is initialized
+            // Developers can use this to add or remove processors
+        }
     ]
 ]);

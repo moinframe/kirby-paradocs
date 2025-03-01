@@ -1,6 +1,6 @@
 <?php
 
-namespace Moinframe\ParaDocs;
+namespace Moinframe\ParaDocs\Page;
 
 use Kirby\Cms\Page;
 

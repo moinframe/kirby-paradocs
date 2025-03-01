@@ -1,11 +1,12 @@
 <?php
 
-namespace Moinframe\ParaDocs;
+namespace Moinframe\ParaDocs\Page;
 
 use Kirby\Cms\Page;
+use Moinframe\ParaDocs\Plugins;
 
 /**
- * Model for plugin overview page
+ * Model for plugins overview page
  **/
 class IndexPage extends Page
 {
