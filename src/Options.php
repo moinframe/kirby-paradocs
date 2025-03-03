@@ -66,4 +66,13 @@ class Options
     {
         return option('moinframe.kirby-paradocs.highlighter', 'phiki');
     }
+
+    /**
+     * Check if caching is enabled
+     * @return bool
+     */
+    public static function cache(): bool
+    {
+        return option('moinframe.kirby-paradocs.cache', true);
+    }
 }

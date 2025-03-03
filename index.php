@@ -5,6 +5,9 @@ use Kirby\Cms\App as Kirby;
 @include_once __DIR__ . '/vendor/autoload.php';
 
 Kirby::plugin('moinframe/kirby-paradocs', [
+    'options' => [
+        'cache' => true
+    ],
     'routes' => Moinframe\ParaDocs\Routes::register(),
     'templates' => [
         'paradocs-index' => __DIR__ . '/templates/paradocs-index.php',
