@@ -37,7 +37,7 @@ class Routes
 
                     // Save to cache
                     if ($cacheEnabled) {
-                        $cache->set($cacheKey, $rendered, 60 * 24); // Cache for 24 hours
+                        $cache->set($cacheKey, $rendered, Options::cacheTime());
                     }
 
                     return $rendered;
@@ -70,7 +70,7 @@ class Routes
 
                     // Save to cache
                     if ($cacheEnabled) {
-                        $cache->set($cacheKey, $rendered, 60 * 24); // Cache for 24 hours
+                        $cache->set($cacheKey, $rendered, Options::cacheTime());
                     }
 
                     return $rendered;

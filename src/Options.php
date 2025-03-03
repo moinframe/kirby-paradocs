@@ -73,6 +73,19 @@ class Options
      */
     public static function cache(): bool
     {
-        return option('moinframe.kirby-paradocs.cache', true);
+        $cache = option('moinframe.kirby-paradocs.cache', true);
+        if (is_array($cache) && isset($cache['active'])) {
+            return $cache['active'];
+        }
+        return $cache;
+    }
+
+    /**
+     * Get cache expiration time
+     * @return int
+     */
+    public static function cacheTime(): int
+    {
+        return option('moinframe.kirby-paradocs.cache.expire', 60 * 24);
     }
 }
