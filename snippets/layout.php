@@ -8,7 +8,7 @@
     <?= css(Kirby\Cms\App::plugin('moinframe/kirby-paradocs')->asset('index.css')) ?>
 </head>
 
-<body>
+<body data-template="<?= $page->intendedTemplate()->name() ?>">
     <aside>
         <div class="sidebar">
             <?php if (isset($plugin)): ?>
