@@ -15,10 +15,6 @@ return [
         // With this option set to true, the index page will not be accessible but the docs for each plugin will still be accessible
         'index.hide' => false,
 
-        // Allow all plugins to be included
-        // If false, only plugins listed in the safelist will be included
-        'includeAll' => false,
-
         // Safelist plugins to be included in the docs
         // If null, all plugins will be included
         // e.g. ['myname/my-plugin', 'myname/my-other-plugin']
@@ -33,6 +29,16 @@ return [
         // Available options: 'phiki' (requires phiki/phiki package), 'simple'
         // If you choose 'phiki' as highlighter but don't have the package installed, the plugin will automatically fall back to 'simple' highlighter.
         'highlighter' => 'phiki',
+
+        // Set if caching should be enabled
+        // If false, the generated documentation pages will not be cached
+        'cache' => true,
+        // OR
+        'cache.active' => true,
+
+        // Set cache expiration time
+        // If caching is enabled, the cache will be invalidated after this time
+        'cache.expire' => 60 * 24
     ]
 ];
 ```

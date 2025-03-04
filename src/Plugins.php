@@ -38,8 +38,8 @@ class Plugins
         $configPath = Plugins::configPath($plugin);
         $readmePath = $plugin->root() . '/README.md';
         $hasSafelist = null !== Options::safelist();
-        // If safelist active: either config or readme path must exists and plugin must be safelisted. If not, config must exist or readme path must exist when include option is present.
-        return $hasSafelist ? (F::exists($configPath) || F::exists($readmePath)) && Plugins::isInSafelist($plugin) : (F::exists($configPath) || (F::exists($readmePath) && Options::includeAll()));
+        // If safelist active: either config or readme path must exists and plugin must be safelisted. If not, config or readme path must exist.
+        return $hasSafelist ? (F::exists($configPath) || F::exists($readmePath)) && Plugins::isInSafelist($plugin) : (F::exists($configPath) || F::exists($readmePath));
     }
 
     /**

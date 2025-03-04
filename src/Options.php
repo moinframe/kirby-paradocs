@@ -32,15 +32,6 @@ class Options
     }
 
     /**
-     * Allow all plugins to be included
-     * @return bool
-     * */
-    public static function includeAll(): bool
-    {
-        return option('moinframe.kirby-paradocs.includeAll', false);
-    }
-
-    /**
      * Safelist plugins to be included in the docs
      * @return array list of plugin names
      */
