@@ -7,9 +7,9 @@ The primary use case for this plugin is to easily provide documentation pages fo
 ## Features
 
 - Automatically generates documentation pages for all installed plugins
-- (Optional) user authentication to restrict access
 - Provides frontend inspired by the Kirby Docs
-- Configurable syntax highlighting with simple or enhanced options
+- (Optional) user authentication to restrict access
+- (Optional) syntax highlighting with [Phiki](https://github.com/phiki/phiki)
 
 
 ## Installation
