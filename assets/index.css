@@ -223,9 +223,12 @@ pre {
   font-size: var(--font-size-sm);
   background-color: var(--color-pre-background);
   color: var(--color-pre-color);
-  padding: var(--space-md);
+  padding: var(--space-lg) var(--space-md) var(--space-md) var(--space-md);
   border-radius: var(--border-radius);
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-dimmed) var(--color-pre-background);
   margin: var(--space-md) 0;
 }
 
