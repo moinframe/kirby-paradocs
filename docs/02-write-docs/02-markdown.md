@@ -2,6 +2,8 @@
 title: Markdown
 ---
 
+Kirby Paradocs supports standard markdown syntax. Some additional features are available.
+
 ## Frontmatter
 
 Frontmatter is a YAML block at the top of a markdown file that contains metadata about the page. It is used to provide additional information about the page. You can use it to set the page title.
@@ -10,6 +12,24 @@ Frontmatter is a YAML block at the top of a markdown file that contains metadata
 ---
 title: My Page
 ---
+```
+
+## Relative Images
+
+Relative images will be removed from the rendered documentation page. You can however use hosted images in your documentation pages.
+
+```markdown
+![Alt text](https://example.com/image.png)
+```
+
+## Code Blocks
+
+Code blocks will be syntax highlighted using the configured highlighter.
+
+```php
+return [
+  'my' => 'codeblock'
+];
 ```
 
 
@@ -40,14 +60,3 @@ You can use GitHub-style alerts in your documentation pages. These alerts will b
 
 > [!CAUTION] This is a caution
 
-## Relative Images
-
-Relative images will be removed from the rendered documentation page. You can however use hosted images in your documentation pages.
-
-```markdown
-![Alt text](https://example.com/image.png)
-```
-
-## Code Blocks
-
-Code blocks will be syntax highlighted using the configured highlighter.
