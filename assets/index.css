@@ -138,8 +138,8 @@ body {
 
 body[data-template="paradocs-index"] {
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, auto);
-  grid-template-areas: "header" "sidebar" "main";
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas: "header" "main";
 }
 
 /* Typography */
@@ -271,6 +271,13 @@ ol li+li {
   margin-top: var(--space-xs);
 }
 
+/* Header */
+
+body>header {
+  grid-area: header;
+  padding: var(--space-md) 0;
+}
+
 /* Main */
 
 main {
@@ -280,6 +287,9 @@ main {
 }
 
 /* Sidebar */
+body[data-template="paradocs-index"] aside {
+  display: none;
+}
 
 aside {
   display: flex;

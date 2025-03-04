@@ -9,6 +9,7 @@
 </head>
 
 <body data-template="<?= $page->intendedTemplate()->name() ?>">
+    <?php snippet('paradocs/header') ?>
     <aside>
         <div class="sidebar">
             <?php if (isset($plugin)): ?>

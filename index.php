@@ -16,8 +16,9 @@ Kirby::plugin('moinframe/kirby-paradocs', [
         'paradocs-plugin-directory' => __DIR__ . '/templates/paradocs-plugin-directory.php'
     ],
     'snippets' => [
-        'paradocs/menu' => __DIR__ . '/snippets/menu.php',
         'paradocs/layout' => __DIR__ . '/snippets/layout.php',
+        'paradocs/header' => __DIR__ . '/snippets/header.php',
+        'paradocs/menu' => __DIR__ . '/snippets/menu.php',
         'paradocs/alert' => __DIR__ . '/snippets/alert.php',
         'paradocs/codeblock' => __DIR__ . '/snippets/codeblock.php'
     ],
