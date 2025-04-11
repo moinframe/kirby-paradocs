@@ -347,7 +347,7 @@ aside details {
   padding-left: var(--space-m);
 }
 
-aside details summary {
+aside details>summary {
   list-style: none;
   margin-left: calc((var(--space-m) + var(--space-2xs)) * -1);
   display: flex;
@@ -357,7 +357,7 @@ aside details summary {
   justify-content: flex-end;
 }
 
-aside details summary::after {
+aside details>summary::after {
   content: "";
   width: 1rem;
   display: block;
@@ -368,7 +368,7 @@ aside details summary::after {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>');
 }
 
-aside details[open] summary::after {
+aside details[open]>summary::after {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path d="M5 11V13H19V11H5Z"></path></svg>');
 }
 
