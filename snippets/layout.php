@@ -14,7 +14,11 @@
         <div class="sidebar">
             <?php if (isset($plugin)): ?>
                 <header>
-                    <p><a href="<?= $plugin->url() ?>"><strong><?= $plugin->title() ?></strong></a></p>
+                    <?php if ($plugin->logo()->isNotEmpty()): ?>
+                        <a href="<?= $plugin->url() ?>" aria-label="<?= $plugin->title() ?>"><img src="<?= $plugin->logo(); ?>" alt="" aria-hidden /></a>
+                    <?php else: ?>
+                        <p><a href="<?= $plugin->url() ?>"><strong><?= $plugin->title() ?></strong></a></p>
+                    <?php endif; ?>
                 </header>
                 <?php if ($menu): ?>
                     <section class="mt-md">

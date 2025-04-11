@@ -118,6 +118,12 @@ class App
         $readmePath = $plugin['root'] . '/README.md';
         $parsed = ['content' => ''];
 
+        // Get Logo
+        $logo = null;
+
+        if ($plugin['config'] && isset($plugin['config']['logo'])) {
+            $logo = $plugin['plugin']->asset($plugin['config']['logo']);
+        }
         // set readme content if it exists
         if (F::exists($readmePath)) {
             $parsed = $parser->parseFile($readmePath);
@@ -130,6 +136,7 @@ class App
             'content' => [
                 'title' => $parsed['meta']['title'] ?? $plugin['config']['title'] ?? $plugin['id'],
                 'text' => $parsed['content'] ?? '',
+                'logo' => $logo,
                 ...$plugin['info']
             ],
         ]);

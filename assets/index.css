@@ -571,3 +571,17 @@ table th {
 table tr:last-child td {
   border-bottom: 0;
 }
+
+/* Header  */
+.sidebar header a {
+  padding: 0;
+}
+
+.sidebar header img {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  position: relative;
+  left: calc(var(--space-l) * -1);
+}

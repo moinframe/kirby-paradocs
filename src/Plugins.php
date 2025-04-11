@@ -61,6 +61,7 @@ class Plugins
                 'config' => $config,
                 'info' => $plugin->info(),
                 'root' => $plugin->root(),
+                'plugin' => $plugin
             ];
         }
 

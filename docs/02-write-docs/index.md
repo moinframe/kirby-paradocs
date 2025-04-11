@@ -31,6 +31,8 @@ To change the default configuration, create a `.paradocs.json` file in the root 
   // The title of your plugin
   "title": "My Plugin",
   // The folder name where your documentation is located
-  "root": "my-docs-folder"
+  "root": "my-docs-folder",
+  // Optional logo file placed in the assets folder
+  "logo" : "logo.svg"
 }
 ```
