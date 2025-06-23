@@ -60,7 +60,7 @@ class Parser
      * Parse a markdown file and convert to Kirby content
      *
      * @param string $path Path to the markdown file
-     * @return array Array with meta, content and slug
+     * @return array{meta: array<string, mixed>, content: string, slug: string} Array with meta, content and slug
      */
     public function parseFile(string $path): array
     {
@@ -75,6 +75,9 @@ class Parser
         }
 
         $content = F::read($path);
+        if ($content === false) {
+            throw new \Exception("Could not read file: {$path}");
+        }
         $parsed = $this->extractStandardFrontmatter($content);
         $html = $this->parseMarkdown($parsed['content']);
 
@@ -108,7 +111,7 @@ class Parser
             $result = $processor->process($processedContent);
             $processedContent = $result['content'];
 
-            if (!empty($result['elements'])) {
+            if (count($result['elements']) > 0) {
                 $placeholders[$name] = $result['elements'];
             }
         }
@@ -120,7 +123,11 @@ class Parser
         foreach ($placeholders as $name => $elements) {
             foreach ($elements as $i => $element) {
                 $placeholder = "<!-- {$name}_{$i} -->";
-                $rendered = $this->processors->get($name)->render($element);
+                $processor = $this->processors->get($name);
+                if ($processor === null) {
+                    continue;
+                }
+                $rendered = $processor->render($element);
                 $html = str_replace($placeholder, $rendered, $html);
             }
         }
@@ -139,7 +146,7 @@ class Parser
      * Extract standard YAML frontmatter (--- delimited)
      *
      * @param string $content Raw markdown content
-     * @return array Frontmatter and content without frontmatter
+     * @return array{frontmatter: array<string, mixed>, content: string} Frontmatter and content without frontmatter
      */
     private function extractStandardFrontmatter(string $content): array
     {
@@ -147,12 +154,12 @@ class Parser
         $contentPart = $content;
 
         // Pattern to match standard frontmatter between --- delimiters
-        if (preg_match('/^---\s*\n(.*?)\n---\s*\n(.*)/s', $content, $matches)) {
+        if (preg_match('/^---\s*\n(.*?)\n---\s*\n(.*)/s', $content, $matches) === 1) {
             try {
                 // Use Kirby's YAML parser on just the frontmatter section
                 $frontmatter = Yaml::decode($matches[1]);
                 $contentPart = $matches[2];
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 // Silently fail and use original content if YAML parsing fails
             }
         }

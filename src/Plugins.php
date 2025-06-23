@@ -25,7 +25,8 @@ class Plugins
      */
     public static function isInSafelist($plugin): bool
     {
-        return A::has(Options::safelist(), $plugin->id());
+        $safelist = Options::safelist();
+        return $safelist !== null && A::has($safelist, $plugin->id());
     }
 
     /**
@@ -46,6 +47,10 @@ class Plugins
      * Get all plugins
      * @return array
      */
+    /**
+     * Get all plugins
+     * @return array<string, mixed>
+     */
     public static function getAll(): array
     {
         $plugins = [];
@@ -55,7 +60,8 @@ class Plugins
             if (!Plugins::isSupported($plugin)) continue;
 
             $id = Str::slug($key);
-            $config = json_decode(F::read(Plugins::configPath($plugin)), true);
+            $configContent = F::read(Plugins::configPath($plugin));
+            $config = $configContent !== false ? json_decode($configContent, true) : null;
             $plugins[$id] = [
                 'id' => $id,
                 'config' => $config,
@@ -70,6 +76,10 @@ class Plugins
 
     /**
      * Get details for a specific plugin with documentation
+     */
+    /**
+     * Get details for a specific plugin with documentation
+     * @return array<string, mixed>|null
      */
     public static function get(string $pluginName): ?array
     {

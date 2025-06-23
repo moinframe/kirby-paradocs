@@ -33,9 +33,9 @@ class Options
 
     /**
      * Safelist plugins to be included in the docs
-     * @return array list of plugin names
+     * @return array<string>|null list of plugin names
      */
-    public static function safelist(): array | null
+    public static function safelist(): ?array
     {
         return option('moinframe.kirby-paradocs.safelist', null);
     }

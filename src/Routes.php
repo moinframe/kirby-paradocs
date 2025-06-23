@@ -7,6 +7,9 @@ use Moinframe\ParaDocs\App;
 
 class Routes
 {
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     public static function register(): array
     {
 
@@ -19,7 +22,7 @@ class Routes
                         return false;
                     }
 
-                    if (!Options::public() && !kirby()->user()) {
+                    if (!Options::public() && kirby()->user() === null) {
                         return false;
                     }
 
@@ -47,7 +50,7 @@ class Routes
                 'pattern' => Options::slug() . '/(:all)',
                 'action' => function ($path) {
 
-                    if (!Options::public() && !kirby()->user()) {
+                    if (!Options::public() && kirby()->user() === null) {
                         return false;
                     }
 
@@ -63,7 +66,7 @@ class Routes
 
                     $indexPage = App::create();
                     $page = $indexPage->index()->find(Options::slug() . "/" . $path);
-                    if (!$page) return;
+                    if ($page === null) return;
                     $plugin = $page->parents()->flip()->nth(1) ?? $page;
 
                     $rendered = $page->render(['menu' => $plugin->children(), 'plugin' => $plugin]);

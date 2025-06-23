@@ -26,7 +26,7 @@ class AlertProcessor extends Processor
      * Process content and extract alerts
      *
      * @param string $content Content to process
-     * @return array Processed content and extracted elements
+     * @return array{content: string, elements: array<mixed>} Processed content and extracted elements
      */
     public function process(string $content): array
     {
@@ -42,6 +42,11 @@ class AlertProcessor extends Processor
 
             return "<!-- {$name}_" . (count($elements) - 1) . " -->";
         }, $content);
+        
+        // Ensure processedContent is not null
+        if ($processedContent === null) {
+            $processedContent = $content;
+        }
 
         return [
             'content' => $processedContent,
@@ -52,14 +57,20 @@ class AlertProcessor extends Processor
     /**
      * Render an alert to HTML
      *
-     * @param array $data Extracted data
+     * @param array<string, mixed> $data Extracted data
      * @return string HTML output
      */
     public function render(array $data): string
     {
-        return snippet('paradocs/alert', [
+        $rendered = snippet('paradocs/alert', [
             'type' => $data['type'],
             'content' => $data['content']
         ], true);
+        
+        if (is_string($rendered)) {
+            return $rendered;
+        }
+        
+        return '';
     }
 }

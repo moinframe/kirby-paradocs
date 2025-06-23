@@ -26,14 +26,14 @@ abstract class Processor
      * Process markdown content
      * 
      * @param string $content Content to process
-     * @return array Processed content and extracted elements
+     * @return array{content: string, elements: array<mixed>} Processed content and extracted elements
      */
     abstract public function process(string $content): array;
 
     /**
      * Render extracted data to HTML
      * 
-     * @param array $data Extracted data
+     * @param array<string, mixed> $data Extracted data
      * @return string HTML output
      */
     abstract public function render(array $data): string;

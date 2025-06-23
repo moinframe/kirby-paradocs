@@ -14,6 +14,7 @@ class ProcessorCollection
 {
     /**
      * Registered processors
+     * @var array<string, Processor>
      */
     protected array $processors = [];
 
@@ -103,16 +104,16 @@ class ProcessorCollection
     }
 
     /**
-     * Get all registered processors
+     * Get all registered processors as array
      * 
-     * @return array All processors as arrays
+     * @return array<string, mixed> All processors as arrays
      */
     public function toArray(): array
     {
         $result = [];
         
         foreach ($this->processors as $name => $processor) {
-            $result[$name] = $processor->toArray();
+            $result[$name] = ['name' => $processor->getName()];
         }
         
         return $result;
@@ -121,7 +122,7 @@ class ProcessorCollection
     /**
      * Get all processors
      * 
-     * @return array All processors
+     * @return array<string, Processor> All processors
      */
     public function all(): array
     {

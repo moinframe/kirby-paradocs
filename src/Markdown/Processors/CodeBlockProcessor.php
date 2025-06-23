@@ -35,7 +35,7 @@ class CodeBlockProcessor extends Processor
      * Process content and extract code blocks
      *
      * @param string $content Content to process
-     * @return array Processed content and extracted elements
+     * @return array{content: string, elements: array<mixed>} Processed content and extracted elements
      */
     public function process(string $content): array
     {
@@ -46,7 +46,7 @@ class CodeBlockProcessor extends Processor
         // Match code blocks with position information
         preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
 
-        if (empty($matches[0])) {
+        if (count($matches[0]) === 0) {
             return ['content' => $content, 'elements' => []];
         }
 
@@ -86,15 +86,21 @@ class CodeBlockProcessor extends Processor
     /**
      * Render a code block to HTML
      *
-     * @param array $data Extracted data
+     * @param array<string, mixed> $data Extracted data
      * @return string HTML output
      */
     public function render(array $data): string
     {
-        return snippet('paradocs/codeblock', [
+        $rendered = snippet('paradocs/codeblock', [
             'highlighter' => $this->highlighter,
             'language' => $data['language'],
             'code' => $data['code']
         ], true);
+        
+        if (is_string($rendered)) {
+            return $rendered;
+        }
+        
+        return '';
     }
 }

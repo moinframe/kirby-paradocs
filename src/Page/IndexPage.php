@@ -12,6 +12,7 @@ class IndexPage extends Page
 {
     /**
      * Get all plugins with documentation
+     * @return array<string, mixed>
      */
     public function plugins(): array
     {

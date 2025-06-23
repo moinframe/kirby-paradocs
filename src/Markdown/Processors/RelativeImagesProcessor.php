@@ -21,7 +21,7 @@ class RelativeImagesProcessor extends Processor
      * Process HTML content to remove relative image tags
      *
      * @param string $content Content to process
-     * @return array Processed content and extracted elements
+     * @return array{content: string, elements: array<mixed>} Processed content and extracted elements
      */
     public function process(string $content): array
     {
@@ -36,7 +36,7 @@ class RelativeImagesProcessor extends Processor
     /**
      * Render HTML after removing relative image tags
      *
-     * @param array $data Extracted data (not used)
+     * @param array<string, mixed> $data Extracted data (not used)
      * @return string HTML output
      */
     public function render(array $data): string
@@ -54,10 +54,12 @@ class RelativeImagesProcessor extends Processor
     public function postProcess(string $html): string
     {
         // Remove all image tags with relative src attributes
-        return preg_replace(
+        $result = preg_replace(
             '/<img[^>]*src=["\']((?!https?:\/\/)[^"\']+)["\'][^>]*>/i',
             '',
             $html
         );
+        
+        return $result ?? $html;
     }
 }

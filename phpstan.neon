@@ -22,6 +22,11 @@ parameters:
     cache:
         nodesByStringCountMax: 512
 
+    # Ignore errors for optional dependencies
+    ignoreErrors:
+        - '#class Phiki\\#'
+        - '#Phiki\\#'
+
 # Extension for better type inference
 includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
