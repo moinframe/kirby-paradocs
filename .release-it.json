@@ -1,0 +1,25 @@
+{
+  "git": {
+    "requireUpstream": true,
+    "push": true,
+    "tagName": "v${version}",
+    "commitMessage": "chore: release v${version}"
+  },
+  "npm": {
+    "publish": false
+  },
+  "github": {
+    "release": true,
+    "web": true
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md"
+    },
+    "@release-it/bumper": {
+      "in": "composer.json",
+      "out": "composer.json"
+    }
+  }
+}

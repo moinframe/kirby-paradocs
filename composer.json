@@ -7,15 +7,22 @@
     "authors": [
         {
             "name": "Justus Kraft",
-            "email": "justus@moinfra.me"
+            "email": "justus@moinfra.me",
+            "homepage": "https://moinfra.me"
         }
     ],
+    "homepage": "https://github.com/moinframe/kirby-paradocs",
     "require": {
         "getkirby/composer-installer": "^1.1",
         "getkirby/cms": "^4.6"
     },
     "suggest": {
         "phiki/phiki": "^1.1 - Enhanced syntax highlighting"
+    },
+    "support": {
+        "docs": "https://moinfra.me/docs/moinframe-kirby-paradocs",
+        "source": "https://github.com/moinframe/kirby-paradocs",
+        "issues": "https://github.com/moinframe/kirby-paradocs/issues"
     },
     "autoload": {
         "psr-4": {
@@ -27,5 +34,16 @@
         "allow-plugins": {
             "getkirby/composer-installer": true
         }
+    },
+    "extra": {
+        "installer-name": "paradocs"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0"
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse"
     }
 }

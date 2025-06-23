@@ -10,8 +10,11 @@ Download and copy this repository to `/site/plugins/kirby-paradocs`.
 
 ### Composer
 
-```sh
+```bash
 composer require moinframe/kirby-paradocs
+
+# With enhanced syntax highlighting
+composer require moinframe/kirby-paradocs phiki/phiki
 ```
 
 ### Git submodule

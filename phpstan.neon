@@ -1,0 +1,28 @@
+parameters:
+    # Level 8 is the highest level of analysis (0 is the lowest)
+    # Adjust based on your project's maturity and needs
+    level: 8
+
+    # Paths to analyze
+    paths:
+        - index.php
+        - src
+
+    # Exclude paths that don't need analysis
+    excludePaths:
+        analyseAndScan:
+            - vendor
+            - node_modules
+
+    # Cache
+    tmpDir: .phpstan-cache
+
+
+    # Use cache
+    cache:
+        nodesByStringCountMax: 512
+
+# Extension for better type inference
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
