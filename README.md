@@ -52,9 +52,9 @@ Navigate to `/docs` in your Kirby site to view the generated documentation. You 
 
 ## Documentation
 
-- [Getting started](https://moinfra.me/docs/moinframe-kirby-paradocs/01-getting-started) - Complete setup instructions
-- [Writing docs](https://moinfra.me/docs/moinframe-kirby-paradocs/02-write-docs) - How to write documentation
-- [Advanced](https://moinfra.me/docs/moinframe-kirby-paradocs/03-advanced) - Advanced configuration options
+- [Getting started](https://moinfra.me/docs/moinframe-paradocs/01-getting-started) - Complete setup instructions
+- [Writing docs](https://moinfra.me/docs/moinframe-paradocs/02-write-docs) - How to write documentation
+- [Advanced](https://moinfra.me/docs/moinframe-paradocs/03-advanced) - Advanced configuration options
 
 ## Requirements
 
@@ -64,7 +64,7 @@ Navigate to `/docs` in your Kirby site to view the generated documentation. You 
 
 ## Support
 
-- **Documentation:** [Website](https://moinfra.me/docs/moinframe-kirby-paradocs)
+- **Documentation:** [Website](https://moinfra.me/docs/moinframe-paradocs)
 - **Issues:** [GitHub Issues](https://github.com/moinframe/kirby-paradocs/issues)
 - **Source Code:** [GitHub Repository](https://github.com/moinframe/kirby-paradocs)
 
