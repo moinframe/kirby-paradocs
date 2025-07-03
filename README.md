@@ -1,3 +1,5 @@
+![Kirby Paradocs](kirby-paradocs.jpg)
+
 # Kirby Paradocs
 
 Auto-generate beautiful documentation pages from markdown files within your Kirby plugins.
