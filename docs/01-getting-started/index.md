@@ -6,7 +6,7 @@ title: Getting started
 
 ### Download
 
-Download and copy this repository to `/site/plugins/kirby-paradocs`.
+Download and copy this repository to `/site/plugins/paradocs`.
 
 ### Composer
 
@@ -20,7 +20,7 @@ composer require moinframe/kirby-paradocs phiki/phiki
 ### Git submodule
 
 ```sh
-git submodule add https://github.com/moinframe/kirby-paradocs.git site/plugins/kirby-paradocs
+git submodule add https://github.com/moinframe/kirby-paradocs.git site/plugins/paradocs
 ```
 
 ## Usage

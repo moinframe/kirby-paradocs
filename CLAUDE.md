@@ -39,7 +39,7 @@ The plugin follows a modular architecture:
 
 Plugin configuration in `site/config/config.php`:
 ```php
-'moinframe.kirby-paradocs' => [
+'moinframe.paradocs' => [
     'index' => [
         'slug' => 'docs',           // URL slug for docs (default: 'docs')
         'title' => 'Documentation', // Title for docs index (default: 'Documentation')

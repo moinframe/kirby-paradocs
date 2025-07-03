@@ -3,7 +3,7 @@ You can configure the plugin in your site's `site/config/config.php` file:
 ```php
 return [
     // ... other config options
-    'moinframe.kirby-paradocs' => [
+    'moinframe.paradocs' => [
         // Set the slug of the index page
         // This is the page that will be used as the root for all plugin docs
         'index.slug' => 'docs',
