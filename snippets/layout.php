@@ -4,7 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= Moinframe\ParaDocs\Options::title() ?></title>
+
+    <title><?= $page->title() ?><?= $page->parent() ? " - " . $page->parent()->title() : "" ?></title>
+    <?php if ($page->description()->isNotEmpty()): ?>
+        <meta name="description" content="<?= $page->description() ?>">
+    <?php endif ?>
+
+    <meta property="og:title" content="<?= $page->title() ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?= $page->url() ?>">
+    <?php if ($page->description()->isNotEmpty()): ?>
+        <meta property="og:description" content="<?= $page->description() ?>">
+    <?php endif ?>
+
     <?= css(Kirby\Cms\App::plugin('moinframe/kirby-paradocs')->asset('index.css')) ?>
 </head>
 

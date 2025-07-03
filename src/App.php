@@ -147,6 +147,7 @@ class App
             'parent' => $parent,
             'content' => [
                 'title' => $parsed['meta']['title'] ?? $plugin['config']['title'] ?? $plugin['id'],
+                'description' => $parsed['meta']['description'] ?? $plugin['config']['description'] ?? $plugin['info']['description'] ?? '',
                 'text' => $parsed['content'],
                 'logo' => $logo,
                 ...$plugin['info']
@@ -185,6 +186,7 @@ class App
                 'content' => [
                     ...$parent->content()->toArray(),
                     'title' => $parsed['meta']['title'] ?? $parent->title(),
+                    'description' => $parsed['meta']['description'] ?? '',
                     'text' => $parsed['content'],
                 ]
             ]);
@@ -223,7 +225,8 @@ class App
                     'parent' => $parent,
                     'template' => 'paradocs-plugin-directory',
                     'content' => [
-                        'title' => Str::ucfirst($name)
+                        'title' => Str::ucfirst($name),
+                        'description' => ''
                     ]
                 ]);
 
