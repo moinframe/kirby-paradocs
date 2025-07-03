@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.1](///compare/v1.0.0-beta.0...v1.0.0-beta.1) (2025-07-03)
+
+### Features
+
+* add dynamic meta tags, add description deb1162
+* rename to paradocs 075b4b7
+
 ## 1.0.0-beta.0 (2025-06-23)
 
 ### Features
