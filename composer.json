@@ -3,7 +3,7 @@
     "description": "Auto-generate beautiful documentation pages using markdown",
     "license": "MIT",
     "type": "kirby-plugin",
-    "version": "1.0.0-beta.1",
+    "version": "1.0.0-beta.2",
     "authors": [
         {
             "name": "Justus Kraft",

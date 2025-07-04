@@ -1,6 +1,6 @@
 {
   "name": "kirby-paradocs",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Auto-generate beautiful documentation pages using markdown",
   "main": "",
   "scripts": {

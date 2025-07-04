@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.0-beta.2](///compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-07-04)
+
+### Bug Fixes
+
+* make compatible with kirby 5 4c1ce34
+
 ## [1.0.0-beta.1](///compare/v1.0.0-beta.0...v1.0.0-beta.1) (2025-07-03)
 
 ### Features
