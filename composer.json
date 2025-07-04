@@ -14,7 +14,7 @@
     "homepage": "https://github.com/moinframe/kirby-paradocs",
     "require": {
         "getkirby/composer-installer": "^1.1",
-        "getkirby/cms": "^4.6"
+        "getkirby/cms": "^4.6|^5.0"
     },
     "suggest": {
         "phiki/phiki": "^1.1 - Enhanced syntax highlighting"

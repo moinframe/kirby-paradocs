@@ -25,8 +25,8 @@
                                 <span><?= $plugin->license() ?></span>
                             <?php endif ?>
 
-                            <?php if ($plugin->version()->isNotEmpty()): ?>
-                                <span><?= $plugin->version() ?></span>
+                            <?php if ($plugin->content()->version()->isNotEmpty()): ?>
+                                <span><?= $plugin->content()->version() ?></span>
                             <?php endif ?>
 
                             <?php if ($plugin->homepage()->isNotEmpty()): ?>
