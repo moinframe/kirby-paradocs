@@ -124,14 +124,14 @@ body {
   grid-template-columns: var(--sidebar-width) auto;
   grid-template-rows: auto 1fr;
   grid-gap: var(--space-2xl);
-  grid-template-areas: "header header" "sidebar main";
+  grid-template-areas: "header header" "sidebar main" "footer footer";
 }
 
 @media (max-width: 768px) {
   body {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
-    grid-template-areas: "header" "sidebar" "main";
+    grid-template-areas: "header" "sidebar" "main" "footer";
   }
 }
 
@@ -139,7 +139,7 @@ body {
 body[data-template="paradocs-index"] {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, auto);
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main" "footer";
 }
 
 /* Typography */
@@ -371,6 +371,14 @@ aside details>summary::after {
 aside details[open]>summary::after {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path d="M5 11V13H19V11H5Z"></path></svg>');
 }
+
+/* Footer */
+
+body>footer {
+  grid-area: footer;
+  padding: var(--space-m) 0;
+}
+
 
 /* Tags */
 

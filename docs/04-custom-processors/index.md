@@ -1,5 +1,5 @@
 ---
-title: Advanced Usage
+title: Custom Processors
 ---
 
 Kirby Paradocs offers powerful features for customizing and extending your documentation site.

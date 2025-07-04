@@ -18,9 +18,12 @@ Kirby::plugin('moinframe/paradocs', [
     'snippets' => [
         'paradocs/layout' => __DIR__ . '/snippets/layout.php',
         'paradocs/header' => __DIR__ . '/snippets/header.php',
+        'paradocs/footer' => __DIR__ . '/snippets/footer.php',
         'paradocs/menu' => __DIR__ . '/snippets/menu.php',
         'paradocs/alert' => __DIR__ . '/snippets/alert.php',
-        'paradocs/codeblock' => __DIR__ . '/snippets/codeblock.php'
+        'paradocs/codeblock' => __DIR__ . '/snippets/codeblock.php',
+        'paradocs/head' => __DIR__ . '/snippets/head.php',
+        'paradocs/foot' => __DIR__ . '/snippets/foot.php'
     ],
     'hooks' => [
         'paradocs.parser.ready' => function ($parser) {
