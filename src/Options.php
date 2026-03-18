@@ -65,10 +65,10 @@ class Options
 	public static function cache(): bool
 	{
 		$cache = option('moinframe.paradocs.cache', true);
-		if (is_array($cache) && isset($cache['active'])) {
-			return $cache['active'];
+		if (is_array($cache)) {
+			return (bool) ($cache['active'] ?? true);
 		}
-		return $cache;
+		return (bool) $cache;
 	}
 
 	/**
