@@ -6,6 +6,7 @@ use Moinframe\ParaDocs\Highlighter\Interface\Highlighter;
 use Moinframe\ParaDocs\Markdown\Processors\AlertProcessor;
 use Moinframe\ParaDocs\Markdown\Processors\CodeBlockProcessor;
 use Moinframe\ParaDocs\Markdown\Processors\RelativeImagesProcessor;
+use Moinframe\ParaDocs\Markdown\Processors\RelativeLinksProcessor;
 
 /**
  * Collection of markdown processors
@@ -42,6 +43,9 @@ class ProcessorCollection
         
         // Register relative images processor
         $this->add(new RelativeImagesProcessor());
+
+        // Register relative links processor
+        $this->add(new RelativeLinksProcessor());
     }
     
     /**

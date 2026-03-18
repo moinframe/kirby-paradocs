@@ -8,6 +8,7 @@ use Kirby\Filesystem\F;
 use Moinframe\ParaDocs\Options;
 use Moinframe\ParaDocs\Page\IndexPage;
 use Moinframe\ParaDocs\Markdown\Parser;
+use Moinframe\ParaDocs\Markdown\Processors\RelativeLinksProcessor;
 
 class App
 {
@@ -105,10 +106,11 @@ class App
         $fileStructure = $this->readFileStructureRecursively($docsPath);
 
         // Build root plugin page props
+        $pluginSlug = $plugin['id'];
         $rootProps = $this->buildPluginRootProps($plugin);
 
         // Build children props recursively and merge into root
-        $childrenResult = $this->buildChildrenPropsRecursively($fileStructure, $docsPath);
+        $childrenResult = $this->buildChildrenPropsRecursively($fileStructure, $docsPath, $pluginSlug);
 
         // If index.md provided content overrides, merge them
         if ($childrenResult['parentOverrides'] !== null) {
@@ -190,6 +192,8 @@ class App
         }
         // set readme content if it exists
         if (F::exists($readmePath)) {
+            $docsRoot = $plugin['config']['root'] ?? Options::slug();
+            $this->setLinksContext($parser, '', $plugin['id'], $docsRoot);
             $parsed = $parser->parseFile($readmePath);
         }
 
@@ -214,7 +218,7 @@ class App
      * @param array<string, mixed> $structure
      * @return array{children: array<string, mixed>, parentOverrides: array<string, mixed>|null}
      */
-    private function buildChildrenPropsRecursively(array $structure, string $basePath): array
+    private function buildChildrenPropsRecursively(array $structure, string $basePath, string $pluginSlug, string $relDir = ''): array
     {
         $childrenProps = [];
         $parentOverrides = null;
@@ -225,6 +229,8 @@ class App
         // First pass: Process index.md files for parent content overrides
         if (isset($structure['index.md'])) {
             $indexItem = $structure['index.md'];
+            $indexRelPath = $relDir !== '' ? $relDir . '/index.md' : 'index.md';
+            $this->setLinksContext($parser, $indexRelPath, $pluginSlug);
             $parsed = $parser->parseFile($indexItem['root']);
 
             $parentOverrides = [
@@ -248,6 +254,8 @@ class App
 
             if ($item['type'] === 'file') {
                 // Create child page props from markdown file
+                $fileRelPath = $relDir !== '' ? $relDir . '/' . $name : $name;
+                $this->setLinksContext($parser, $fileRelPath, $pluginSlug);
                 $parsed = $parser->parseFile($item['root']);
                 $slug = $parsed['slug'];
 
@@ -274,7 +282,8 @@ class App
                 ];
 
                 // Process children recursively
-                $childrenResult = $this->buildChildrenPropsRecursively($item['children'], $basePath . '/' . $name);
+                $childRelDir = $relDir !== '' ? $relDir . '/' . $name : $name;
+                $childrenResult = $this->buildChildrenPropsRecursively($item['children'], $basePath . '/' . $name, $pluginSlug, $childRelDir);
 
                 // Apply index.md overrides to directory page
                 if ($childrenResult['parentOverrides'] !== null) {
@@ -290,5 +299,17 @@ class App
             'children' => $childrenProps,
             'parentOverrides' => $parentOverrides,
         ];
+    }
+
+    /**
+     * Set context on the RelativeLinksProcessor for the current file
+     */
+    private function setLinksContext(Parser $parser, string $fileRelPath, string $pluginSlug, string $docsRoot = ''): void
+    {
+        $processor = $parser->processors()->get('relativeLinks');
+        if ($processor instanceof RelativeLinksProcessor) {
+            $baseUrl = '/' . Options::slug() . '/' . $pluginSlug;
+            $processor->setContext($fileRelPath, $baseUrl, $docsRoot);
+        }
     }
 }
