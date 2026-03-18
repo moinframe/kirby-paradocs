@@ -11,6 +11,7 @@ Paradocs comes with several built-in processors:
 - `AlertProcessor`: Converts alert syntax (e.g. used in GitHub) to styled alert boxes
 - `CodeBlockProcessor`: Handles code blocks with syntax highlighting
 - `RelativeImagesProcessor`: Removes relative images
+- `RelativeLinksProcessor`: Transforms relative links
 
 
 ## Add your own
