@@ -177,6 +177,7 @@ class Parser
 	private function generateSlug(string $path): string
 	{
 		$filename = pathinfo($path, PATHINFO_FILENAME);
+		$filename = preg_replace('/^\d+-/', '', $filename);
 		return Str::slug($filename);
 	}
 }

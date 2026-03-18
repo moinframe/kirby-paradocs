@@ -262,13 +262,13 @@ class App
                 ];
             } else if ($item['type'] === 'directory') {
                 // Build directory page props
-                $sectionSlug = Str::slug($name);
+                $sectionSlug = Str::slug(preg_replace('/^\d+-/', '', $name));
 
                 $sectionProps = [
                     'slug' => $sectionSlug,
                     'template' => 'paradocs-plugin-directory',
                     'content' => [
-                        'title' => Str::ucfirst($name),
+                        'title' => Str::ucfirst(preg_replace('/^\d+-/', '', $name)),
                         'description' => ''
                     ]
                 ];
