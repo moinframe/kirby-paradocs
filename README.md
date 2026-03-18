@@ -24,9 +24,6 @@ The system respects your plugin's existing documentation structure while providi
 
 ## Quick Start
 
-> [!WARNING]
-> This plugin is in active development. Test thoroughly before using in production environments.
-
 
 ### Download
 
@@ -52,10 +49,10 @@ Navigate to `/docs` in your Kirby site to view the generated documentation. You 
 
 ## Documentation
 
-- [Getting started](https://moinfra.me/docs/moinframe-paradocs/01-getting-started) - Complete setup instructions
-- [Writing docs](https://moinfra.me/docs/moinframe-paradocs/02-write-docs) - How to write documentation
-- [Customization](https://moinfra.me/docs/moinframe-paradocs/03-customization) - Customize to fit your site
-- [Custom Processors](https://moinfra.me/docs/moinframe-paradocs/04-custom-processors) - Extend the system with custom processors
+- [Getting started](https://moinfra.me/docs/moinframe-paradocs/getting-started) - Complete setup instructions
+- [Writing docs](https://moinfra.me/docs/moinframe-paradocs/write-docs) - How to write documentation
+- [Customization](https://moinfra.me/docs/moinframe-paradocs/customization) - Customize to fit your site
+- [Custom Processors](https://moinfra.me/docs/moinframe-paradocs/custom-processors) - Extend the system with custom processors
 
 ## Requirements
 
