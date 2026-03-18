@@ -28,6 +28,6 @@ class Simple implements Interface\Highlighter
      */
     private function wrapInHtml(string $code, string $language): string
     {
-        return '<pre class="simple-highlight"><code class="language-' . $language . '">' . $code . '</code></pre>';
+        return '<pre class="simple-highlight"><code class="language-' . htmlspecialchars($language) . '">' . $code . '</code></pre>';
     }
 }

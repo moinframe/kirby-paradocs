@@ -77,7 +77,7 @@ class Phiki implements Interface\Highlighter
             return $code;
         }
 
-        return '<pre><code class="language-' . $language . '">' . $code . '</code></pre>';
+        return '<pre><code class="language-' . htmlspecialchars($language) . '">' . $code . '</code></pre>';
     }
 
     /**
