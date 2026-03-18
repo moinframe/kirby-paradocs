@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.0-beta.4](///compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-03-18)
+
+### Features
+
+* add a processor for relativ links 892c15f
+* remove sorting numbers from urls 0086d52
+* speed up by splitting page and index creation 7464200
+
+### Bug Fixes
+
+* html encode language in codeblocks 4e3adb8
+* load all classes 047ab88
+* load classes without composer 6eac49e
+* menu aria-current 8a87ea4
+* processor always has postProcess method 15d5681
+* table background color on dark mode 9d2949b
+* update cache boolean option faf47e4
+* use docs as default root name ee16154
+* use self for static classes, add type hint ae96fb5
+
 ## [1.0.0-beta.3](///compare/v1.0.0-beta.2...v1.0.0-beta.3) (2025-07-04)
 
 ### Features
