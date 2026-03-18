@@ -39,8 +39,19 @@ abstract class Processor
     abstract public function render(array $data): string;
 
     /**
+     * Post-process HTML content after markdown conversion
+     *
+     * @param string $html The HTML content to process
+     * @return string Processed HTML content
+     */
+    public function postProcess(string $html): string
+    {
+        return $html;
+    }
+
+    /**
      * Get the processor name
-     * 
+     *
      * @return string Processor name
      */
     public function getName(): string
