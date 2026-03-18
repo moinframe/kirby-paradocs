@@ -64,7 +64,8 @@ class Routes
 						return $rendered;
 					}
 
-					$indexPage = App::create();
+					$indexPage = App::createForPath($path);
+					if ($indexPage === null) return;
 					$page = $indexPage->index()->find(Options::slug() . "/" . $path);
 					if ($page === null) return;
 					$plugin = $page->parents()->flip()->nth(1) ?? $page;

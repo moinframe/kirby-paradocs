@@ -3,70 +3,123 @@
 namespace Moinframe\ParaDocs;
 
 use Kirby\Toolkit\Str;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Moinframe\ParaDocs\Options;
 use Moinframe\ParaDocs\Page\IndexPage;
-use Moinframe\ParaDocs\Page\PluginPage;
 use Moinframe\ParaDocs\Markdown\Parser;
 
 class App
 {
+    /**
+     * Create the full index page with all plugin children
+     */
     public static function create(): IndexPage
     {
-        // Create docs index page with plugins as children
-        $indexPage = IndexPage::factory([
-            'slug' => Options::slug(),
-            'template' => 'paradocs-index',
-            'content' => [
-                'title' => Options::title(),
-            ]
-        ]);
+        return IndexPage::factory(self::getTreeProps());
+    }
 
-        // Generate children for each plugin
-        $app = new App();
-        $children = [];
+    /**
+     * Create an index page containing only the plugin subtree needed for a given path.
+     */
+    public static function createForPath(string $path): ?IndexPage
+    {
+        $props = self::getTreeProps();
+        $segments = explode('/', $path);
+        $pluginSlug = $segments[0] ?? null;
 
-        $plugins = $indexPage->plugins();
-        foreach ($plugins as $pluginName => $plugin) {
-            $pluginPage = $app->createPluginDocs(
-                $plugin,
-                $indexPage
-            );
-            $children[$pluginName] = $pluginPage;
+        if ($pluginSlug === null) {
+            return null;
         }
 
-        $indexPage->children = new Pages($children);
-        return $indexPage;
+        // Find the matching plugin in cached props
+        $pluginProps = null;
+        foreach ($props['children'] as $child) {
+            if ($child['slug'] === $pluginSlug) {
+                $pluginProps = $child;
+                break;
+            }
+        }
+
+        if ($pluginProps === null) {
+            return null;
+        }
+
+        // Create index with only the needed plugin as child
+        $props['children'] = [$pluginProps];
+
+        return IndexPage::factory($props);
     }
 
     /**
-     * Generate documentation page hierarchy
+     * Get the full page tree as a props array, cached.
+     * @return array<string, mixed>
      */
+    private static function getTreeProps(): array
+    {
+        $kirby = kirby();
+        $cache = $kirby->cache('moinframe.paradocs');
+        $cacheEnabled = Options::cache();
+        $cacheKey = 'page_tree_props';
+
+        $props = null;
+        if ($cacheEnabled) {
+            $props = $cache->get($cacheKey);
+        }
+
+        if ($props === null) {
+            $app = new App();
+            $childrenProps = [];
+
+            $plugins = Plugins::getAll();
+            foreach ($plugins as $plugin) {
+                $childrenProps[] = $app->buildPluginPageProps($plugin);
+            }
+
+            $props = [
+                'slug' => Options::slug(),
+                'template' => 'paradocs-index',
+                'content' => [
+                    'title' => Options::title(),
+                ],
+                'children' => $childrenProps
+            ];
+
+            if ($cacheEnabled) {
+                $cache->set($cacheKey, $props, Options::cacheTime());
+            }
+        }
+
+        return $props;
+    }
+
     /**
-     * Generate documentation page hierarchy
+     * Build page props for a plugin's documentation
      * @param array<string, mixed> $plugin
+     * @return array<string, mixed>
      */
-    private function createPluginDocs(array $plugin, Page $parent): Page
+    private function buildPluginPageProps(array $plugin): array
     {
         // Get all markdown files in the plugin's docs directory
-        $docsPath = $plugin['root'] . '/' . ($plugin['config']['root'] ??  Options::slug());
+        $docsPath = $plugin['root'] . '/' . ($plugin['config']['root'] ?? Options::slug());
         $fileStructure = $this->readFileStructureRecursively($docsPath);
 
-        // Create root plugin documentation page
-        $rootPage = $this->createPluginRootPage($plugin, $parent);
+        // Build root plugin page props
+        $rootProps = $this->buildPluginRootProps($plugin);
 
-        // Generate children recursively
-        $rootPage = $this->createChildPagesRecursively($rootPage, $fileStructure, $docsPath);
+        // Build children props recursively and merge into root
+        $childrenResult = $this->buildChildrenPropsRecursively($fileStructure, $docsPath);
 
-        return $rootPage;
+        // If index.md provided content overrides, merge them
+        if ($childrenResult['parentOverrides'] !== null) {
+            $rootProps['content'] = array_merge($rootProps['content'], $childrenResult['parentOverrides']);
+        }
+
+        $rootProps['children'] = $childrenResult['children'];
+
+        return $rootProps;
     }
 
-    /**
-     * Get file structure from docs directory
-     */
     /**
      * Get file structure from docs directory
      * @return array<string, mixed>
@@ -116,13 +169,11 @@ class App
     }
 
     /**
-     * Create plugin root page
-     */
-    /**
-     * Create plugin root page
+     * Build props for a plugin root page
      * @param array<string, mixed> $plugin
+     * @return array<string, mixed>
      */
-    private function createPluginRootPage(array $plugin, Page $parent): PluginPage
+    private function buildPluginRootProps(array $plugin): array
     {
         // Get parser with hooks applied
         $parser = $this->createParser();
@@ -130,21 +181,22 @@ class App
         $readmePath = $plugin['root'] . '/README.md';
         $parsed = ['content' => ''];
 
-        // Get Logo
+        // Get logo URL (stored as string for cacheability)
         $logo = null;
 
         if ($plugin['config'] !== null && isset($plugin['config']['logo'])) {
-            $logo = $plugin['plugin']->asset($plugin['config']['logo']);
+            $asset = $plugin['plugin']->asset($plugin['config']['logo']);
+            $logo = $asset?->url();
         }
         // set readme content if it exists
         if (F::exists($readmePath)) {
             $parsed = $parser->parseFile($readmePath);
         }
 
-        return PluginPage::factory([
+        return [
             'slug' => $plugin['id'],
             'template' => 'paradocs-plugin',
-            'parent' => $parent,
+            'model' => 'paradocs-plugin',
             'content' => [
                 'title' => $parsed['meta']['title'] ?? $plugin['config']['title'] ?? $plugin['id'],
                 'description' => $parsed['meta']['description'] ?? $plugin['config']['description'] ?? $plugin['info']['description'] ?? '',
@@ -152,44 +204,39 @@ class App
                 'logo' => $logo,
                 ...$plugin['info']
             ],
-        ]);
+        ];
     }
 
     /**
-     * Generate child pages recursively
-     * If it's a directory, create a page with all folders or markdown files below as children.
-     * If a child is named index, use its content on the parent page.
-     */
-    /**
-     * Generate child pages recursively
-     * If it's a directory, create a page with all folders or markdown files below as children.
-     * If a child is named index, use its content on the parent page.
+     * Build children page props recursively
+     * If it's a directory, create props with all folders or markdown files below as children.
+     * If a child is named index, use its content to override the parent page.
      * @param array<string, mixed> $structure
+     * @return array{children: array<string, mixed>, parentOverrides: array<string, mixed>|null}
      */
-    private function createChildPagesRecursively(Page $parent, array $structure, string $basePath): Page
+    private function buildChildrenPropsRecursively(array $structure, string $basePath): array
     {
-        $children = [];
+        $childrenProps = [];
+        $parentOverrides = null;
 
         // Get parser with hooks applied
         $parser = $this->createParser();
 
-        // First pass: Process index.md files for parent content
+        // First pass: Process index.md files for parent content overrides
         if (isset($structure['index.md'])) {
             $indexItem = $structure['index.md'];
             $parsed = $parser->parseFile($indexItem['root']);
 
-            // Overwrite Parent with content from index.md
-            $parent = Page::factory([
-                'slug' => $parent->slug(),
-                'template' => $parent->template(),
-                'parent' => $parent->parent(),
-                'content' => [
-                    ...$parent->content()->toArray(),
-                    'title' => $parsed['meta']['title'] ?? $parent->title(),
-                    'description' => $parsed['meta']['description'] ?? '',
-                    'text' => $parsed['content'],
-                ]
-            ]);
+            $parentOverrides = [
+                'title' => $parsed['meta']['title'] ?? null,
+                'description' => $parsed['meta']['description'] ?? '',
+                'text' => $parsed['content'],
+            ];
+
+            // Remove null title so it doesn't override existing title
+            if ($parentOverrides['title'] === null) {
+                unset($parentOverrides['title']);
+            }
         }
 
         // Second pass: Process all non-index files and directories
@@ -200,46 +247,48 @@ class App
             }
 
             if ($item['type'] === 'file') {
-                // Create child page from markdown file
+                // Create child page props from markdown file
                 $parsed = $parser->parseFile($item['root']);
                 $slug = $parsed['slug'];
 
-                $page = Page::factory([
+                $childrenProps[] = [
                     'slug' => $slug,
                     'template' => 'paradocs-plugin-page',
-                    'parent' => $parent,
                     'content' => [
                         'title' => $parsed['meta']['title'] ?? Str::ucfirst($slug),
                         'text' => $parsed['content'],
                         'description' => $parsed['meta']['description'] ?? '',
                     ]
-                ]);
-
-                $children[$slug] = $page;
+                ];
             } else if ($item['type'] === 'directory') {
-                // Create directory page
+                // Build directory page props
                 $sectionSlug = Str::slug($name);
 
-                $sectionPage = Page::factory([
+                $sectionProps = [
                     'slug' => $sectionSlug,
-                    'parent' => $parent,
                     'template' => 'paradocs-plugin-directory',
                     'content' => [
                         'title' => Str::ucfirst($name),
                         'description' => ''
                     ]
-                ]);
+                ];
 
                 // Process children recursively
-                $sectionPage = $this->createChildPagesRecursively($sectionPage, $item['children'], $basePath . '/' . $name);
+                $childrenResult = $this->buildChildrenPropsRecursively($item['children'], $basePath . '/' . $name);
 
-                // Always add directory pages to children array
-                $children[$sectionSlug] = $sectionPage;
+                // Apply index.md overrides to directory page
+                if ($childrenResult['parentOverrides'] !== null) {
+                    $sectionProps['content'] = array_merge($sectionProps['content'], $childrenResult['parentOverrides']);
+                }
+
+                $sectionProps['children'] = $childrenResult['children'];
+                $childrenProps[] = $sectionProps;
             }
         }
 
-        // Set the children on the parent page
-        $parent->children = new Pages($children);
-        return $parent;
+        return [
+            'children' => $childrenProps,
+            'parentOverrides' => $parentOverrides,
+        ];
     }
 }
