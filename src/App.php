@@ -102,7 +102,7 @@ class App
     private function buildPluginPageProps(array $plugin): array
     {
         // Get all markdown files in the plugin's docs directory
-        $docsPath = $plugin['root'] . '/' . ($plugin['config']['root'] ?? Options::slug());
+        $docsPath = $plugin['root'] . '/' . ($plugin['config']['root'] ?? 'docs');
         $fileStructure = $this->readFileStructureRecursively($docsPath);
 
         // Build root plugin page props
@@ -192,7 +192,7 @@ class App
         }
         // set readme content if it exists
         if (F::exists($readmePath)) {
-            $docsRoot = $plugin['config']['root'] ?? Options::slug();
+            $docsRoot = $plugin['config']['root'] ?? 'docs';
             $this->setLinksContext($parser, '', $plugin['id'], $docsRoot);
             $parsed = $parser->parseFile($readmePath);
         }
