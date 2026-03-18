@@ -134,9 +134,7 @@ class Parser
 
 		// Apply post-processing to HTML content
 		foreach ($this->processors->all() as $processor) {
-			if (method_exists($processor, 'postProcess')) {
-				$html = $processor->postProcess($html);
-			}
+			$html = $processor->postProcess($html);
 		}
 
 		return $html;
