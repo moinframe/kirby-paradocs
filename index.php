@@ -1,8 +1,13 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
+use Kirby\Filesystem\F;
 
-@include_once __DIR__ . '/vendor/autoload.php';
+F::loadClasses([
+    'Moinframe\\ParaDocs\\Parser' => 'src/Parser.php',
+    'Moinframe\\ParaDocs\\Routes' => 'src/Routes.php',
+    'Moinframe\\ParaDocs\\Options' => 'src/Options.php',
+], __DIR__);
 
 Kirby::plugin('moinframe/paradocs', [
     'options' => [
