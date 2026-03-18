@@ -49,10 +49,10 @@ Navigate to `/docs` in your Kirby site to view the generated documentation. You 
 
 ## Documentation
 
-- [Getting started](https://moinfra.me/docs/moinframe-paradocs/getting-started) - Complete setup instructions
-- [Writing docs](https://moinfra.me/docs/moinframe-paradocs/write-docs) - How to write documentation
-- [Customization](https://moinfra.me/docs/moinframe-paradocs/customization) - Customize to fit your site
-- [Custom Processors](https://moinfra.me/docs/moinframe-paradocs/custom-processors) - Extend the system with custom processors
+- [Getting started](docs/01-getting-started/index.md) - Complete setup instructions
+- [Writing docs](docs/02-write-docs/index.md) - How to write documentation
+- [Customization](docs/02-write-docs/index.md) - Customize to fit your site
+- [Custom Processors](docs/02-write-docs/index.md) - Extend the system with custom processors
 
 ## Requirements
 
