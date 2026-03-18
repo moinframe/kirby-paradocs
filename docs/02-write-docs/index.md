@@ -22,6 +22,12 @@ This is my plugin documentation
 The documentation for your plugin will be accessible at
 `https://yourdomain.com/docs/your-name-your-plugin`.
 
+## File ordering and naming
+
+Documentation files and folders use numbered prefixes to control their order. For example, `01-getting-started.md` will appear before `02-configuration.md`. The number prefix is stripped from the URL slug, so `01-getting-started` becomes `getting-started` in the URL.
+
+An `index.md` file inside a subdirectory serves as the parent page content for that directory. For example, `docs/02-guides/index.md` provides the content shown when a user visits the "guides" section, while other files in that folder become child pages.
+
 ## Configuration
 
 To change the default configuration, create a `.paradocs.json` file in the root of your plugin. This file should contain a JSON object with the following properties:
@@ -34,7 +40,7 @@ To change the default configuration, create a `.paradocs.json` file in the root 
   "description": "This is my plugin documentation",
   // The folder name where your documentation is located
   "root": "my-docs-folder",
-  // Optional logo file placed in the assets folder
+  // Logo file placed in the plugin's assets folder (e.g. site/plugins/your-plugin/assets/logo.svg)
   "logo" : "logo.svg"
 }
 ```

@@ -6,13 +6,16 @@ Kirby Paradocs supports standard markdown syntax. Some additional features are a
 
 ## Frontmatter
 
-Frontmatter is a YAML block at the top of a markdown file that contains metadata about the page. It is used to provide additional information about the page. You can use it to set the page title.
+Frontmatter is a YAML block at the top of a markdown file that contains metadata about the page. It is used to provide additional information about the page. You can use it to set the page title and description.
 
 ```markdown
 ---
 title: My Page
+description: A brief description of the page content
 ---
 ```
+
+The `description` field is used for meta tags on the generated page.
 
 ## Relative Images
 
@@ -31,6 +34,8 @@ return [
   'my' => 'codeblock'
 ];
 ```
+
+When using the Phiki highlighter, the following language aliases are supported: `js` (JavaScript), `ts` (TypeScript), `py` (Python), `c++` (C++), `c#` (C#), `sh`/`bash`/`shell` (Shell), `md` (Markdown), and `yml` (YAML).
 
 
 ## Alerts (GitHub-style)

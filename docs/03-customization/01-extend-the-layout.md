@@ -2,9 +2,9 @@
 title: Extend the Layout
 ---
 
-You can extend the layout used by Paradocs by creating a `paradocs/head`,  `paradocs/header` or `paradocs/footer` snippet in your site's `snippets` folder.
+You can extend the layout used by Paradocs by creating `paradocs/head`, `paradocs/header`, `paradocs/footer`, or `paradocs/foot` snippets in your site's `snippets` folder.
 
-Here's an example of a `paradocs/head` snippet. This snippet will be included before the `<head>` tag of the generated documentation pages.
+Here's an example of a `paradocs/head` snippet. This snippet will be included at the end of the `<head>` tag (after CSS) of the generated documentation pages.
 
 ```php
 // file path: site/snippets/paradocs/head.php
@@ -22,11 +22,19 @@ Here's an example of a `paradocs/header` snippet. It will be added after the ope
 ```
 
 
-And here's an example of a `paradocs/footer` snippet. This snippet will be included before the `</body>` tag of the generated documentation pages. Using the `<footer>` tag will make sure, the styling is correct.
+And here's an example of a `paradocs/footer` snippet. This snippet will be included after the main content area. Using the `<footer>` tag will make sure, the styling is correct.
 
 ```html
 <!-- file path: site/snippets/paradocs/footer.php -->
 <footer>
     <p>Copyright <?= date('Y') ?></p>
 </footer>
+```
+
+The `paradocs/foot` snippet is rendered after the footer, just before the closing `</body>` tag. This is useful for adding scripts or tracking code.
+
+```php
+// file path: site/snippets/paradocs/foot.php
+
+echo '<script src="https://example.com/analytics.js"></script>';
 ```

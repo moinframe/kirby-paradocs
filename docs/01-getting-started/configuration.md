@@ -32,11 +32,14 @@ return [
 
         // Set if caching should be enabled
         // If false, the generated documentation pages will not be cached
+        // Paradocs caches the page tree structure, route responses, and parsed markdown content.
+        // The cache is keyed by file path and modification time, so changes to documentation
+        // files automatically invalidate the relevant cache entries.
         'cache' => true,
         // OR
         'cache.active' => true,
 
-        // Set cache expiration time
+        // Set cache expiration time in minutes (default: 1440 = 24 hours)
         // If caching is enabled, the cache will be invalidated after this time
         'cache.expire' => 60 * 24
     ]
