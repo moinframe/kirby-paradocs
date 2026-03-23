@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.5](///compare/v1.0.0-beta.4...v1.0.0-beta.5) (2026-03-23)
+
+### Features
+
+* add heading anchor links ddb6dd0
+* keep relative images accessible 5013cde
+
 ## [1.0.0-beta.4](///compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-03-18)
 
 ### Features
