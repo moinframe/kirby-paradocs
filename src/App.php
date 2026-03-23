@@ -9,6 +9,7 @@ use Moinframe\ParaDocs\Options;
 use Moinframe\ParaDocs\Page\IndexPage;
 use Moinframe\ParaDocs\Markdown\Parser;
 use Moinframe\ParaDocs\Markdown\Processors\RelativeLinksProcessor;
+use Moinframe\ParaDocs\Markdown\Processors\RelativeImagesProcessor;
 
 class App
 {
@@ -194,6 +195,7 @@ class App
         if (F::exists($readmePath)) {
             $docsRoot = $plugin['config']['root'] ?? 'docs';
             $this->setLinksContext($parser, '', $plugin['id'], $docsRoot);
+            $this->setImagesContext($parser, '', $plugin['id'], $docsRoot);
             $parsed = $parser->parseFile($readmePath);
         }
 
@@ -231,6 +233,7 @@ class App
             $indexItem = $structure['index.md'];
             $indexRelPath = $relDir !== '' ? $relDir . '/index.md' : 'index.md';
             $this->setLinksContext($parser, $indexRelPath, $pluginSlug);
+            $this->setImagesContext($parser, $indexRelPath, $pluginSlug);
             $parsed = $parser->parseFile($indexItem['root']);
 
             $parentOverrides = [
@@ -256,6 +259,7 @@ class App
                 // Create child page props from markdown file
                 $fileRelPath = $relDir !== '' ? $relDir . '/' . $name : $name;
                 $this->setLinksContext($parser, $fileRelPath, $pluginSlug);
+                $this->setImagesContext($parser, $fileRelPath, $pluginSlug);
                 $parsed = $parser->parseFile($item['root']);
                 $slug = $parsed['slug'];
 
@@ -310,6 +314,17 @@ class App
         if ($processor instanceof RelativeLinksProcessor) {
             $baseUrl = '/' . Options::slug() . '/' . $pluginSlug;
             $processor->setContext($fileRelPath, $baseUrl, $docsRoot);
+        }
+    }
+
+    /**
+     * Set context on the RelativeImagesProcessor for the current file
+     */
+    private function setImagesContext(Parser $parser, string $fileRelPath, string $pluginSlug, string $docsRoot = ''): void
+    {
+        $processor = $parser->processors()->get('relativeImages');
+        if ($processor instanceof RelativeImagesProcessor) {
+            $processor->setContext($fileRelPath, $pluginSlug, $docsRoot);
         }
     }
 }

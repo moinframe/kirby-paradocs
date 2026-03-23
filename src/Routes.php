@@ -2,8 +2,12 @@
 
 namespace Moinframe\ParaDocs;
 
+use Kirby\Filesystem\F;
+use Kirby\Http\Response;
+use Kirby\Toolkit\Mime;
 use Moinframe\ParaDocs\Options;
 use Moinframe\ParaDocs\App;
+use Moinframe\ParaDocs\Plugins;
 
 class Routes
 {
@@ -44,6 +48,65 @@ class Routes
 					}
 
 					return $rendered;
+				}
+			],
+			[
+				'pattern' => Options::slug() . '/media/(:any)/(:all)',
+				'action' => function (string $pluginSlug, string $filePath) {
+
+					if (!Options::public() && kirby()->user() === null) {
+						return false;
+					}
+
+					// Only serve allowed image extensions
+					$allowedExtensions = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'ico', 'avif'];
+					$extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+					if (!in_array($extension, $allowedExtensions, true)) {
+						return false;
+					}
+
+					$plugin = Plugins::get($pluginSlug);
+					if ($plugin === null) {
+						return false;
+					}
+
+					// Try docs directory first, then plugin root
+					$docsRoot = $plugin['config']['root'] ?? 'docs';
+					$pluginRoot = realpath($plugin['root']);
+
+					if ($pluginRoot === false) {
+						return false;
+					}
+
+					$absolutePath = $plugin['root'] . '/' . $docsRoot . '/' . $filePath;
+					$realPath = realpath($absolutePath);
+
+					// Fall back to plugin root (e.g. images referenced from README.md)
+					if ($realPath === false) {
+						$absolutePath = $plugin['root'] . '/' . $filePath;
+						$realPath = realpath($absolutePath);
+					}
+
+					if ($realPath === false) {
+						return false;
+					}
+
+					if (!str_starts_with($realPath, $pluginRoot . '/')) {
+						return false;
+					}
+
+					$mime = Mime::type($realPath);
+					$content = F::read($realPath);
+
+					if ($content === false) {
+						return false;
+					}
+
+					return new Response(
+						$content,
+						$mime ?? 'application/octet-stream',
+						200
+					);
 				}
 			],
 			[
