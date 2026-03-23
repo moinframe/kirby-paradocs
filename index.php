@@ -17,6 +17,7 @@ F::loadClasses([
     'Moinframe\\ParaDocs\\Markdown\\Processors\\CodeBlockProcessor' => 'src/Markdown/Processors/CodeBlockProcessor.php',
     'Moinframe\\ParaDocs\\Markdown\\Processors\\RelativeImagesProcessor' => 'src/Markdown/Processors/RelativeImagesProcessor.php',
     'Moinframe\\ParaDocs\\Markdown\\Processors\\RelativeLinksProcessor' => 'src/Markdown/Processors/RelativeLinksProcessor.php',
+    'Moinframe\\ParaDocs\\Markdown\\Processors\\HeadingAnchorProcessor' => 'src/Markdown/Processors/HeadingAnchorProcessor.php',
     'Moinframe\\ParaDocs\\Highlighter\\Interface\\Highlighter' => 'src/Highlighter/Interface/Highlighter.php',
     'Moinframe\\ParaDocs\\Highlighter\\Phiki' => 'src/Highlighter/Phiki.php',
     'Moinframe\\ParaDocs\\Highlighter\\Simple' => 'src/Highlighter/Simple.php',

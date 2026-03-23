@@ -6,6 +6,7 @@ use Moinframe\ParaDocs\Highlighter\Interface\Highlighter;
 use Moinframe\ParaDocs\Markdown\Processors\AlertProcessor;
 use Moinframe\ParaDocs\Markdown\Processors\CodeBlockProcessor;
 use Moinframe\ParaDocs\Markdown\Processors\RelativeImagesProcessor;
+use Moinframe\ParaDocs\Markdown\Processors\HeadingAnchorProcessor;
 use Moinframe\ParaDocs\Markdown\Processors\RelativeLinksProcessor;
 
 /**
@@ -46,8 +47,11 @@ class ProcessorCollection
 
         // Register relative links processor
         $this->add(new RelativeLinksProcessor());
+
+        // Register heading anchor processor
+        $this->add(new HeadingAnchorProcessor());
     }
-    
+
     /**
      * Create highlighter based on configuration options
      *

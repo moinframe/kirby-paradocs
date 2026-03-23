@@ -12,6 +12,7 @@ Paradocs comes with several built-in processors:
 - `CodeBlockProcessor`: Handles code blocks with syntax highlighting
 - `RelativeImagesProcessor`: Removes relative images
 - `RelativeLinksProcessor`: Transforms relative links
+- `HeadingAnchorProcessor`: Adds anchor links to headings
 
 
 ## Add your own

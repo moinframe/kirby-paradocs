@@ -161,6 +161,30 @@ h1 {
   margin-bottom: var(--space-l);
 }
 
+/* Heading Anchors */
+.heading-anchor {
+  text-decoration: none;
+  color: var(--color-text-dimmed);
+  font-weight: var(--font-weight-normal);
+  margin-left: var(--space-2xs);
+  opacity: 0;
+  transition: var(--transition-base);
+}
+
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor,
+h5:hover .heading-anchor,
+h6:hover .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+.heading-anchor:hover,
+.heading-anchor:focus-visible {
+  color: var(--color-primary-dark);
+}
+
 h2 {
   font-size: var(--font-size-2xl);
   margin-top: var(--space-2xl);
