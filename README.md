@@ -6,13 +6,13 @@ Auto-generate beautiful documentation pages from markdown files within your Kirb
 
 ## Features
 
-- 📚 **Auto-Discovery**: Automatically scans installed plugins for documentation
-- 🎨 **Beautiful Frontend**: Clean, responsive documentation interface inspired by Kirby Docs
-- 📝 **Markdown Processing**: Full markdown support with frontmatter, alerts, and code blocks
-- 🔍 **Syntax Highlighting**: Enhanced code highlighting with Phiki integration
-- 🔐 **Access Control**: Optional authentication to restrict documentation access
-- ⚡ **Smart Caching**: Built-in caching for optimal performance
-- 🎯 **Plugin Filtering**: Safelist specific plugins for documentation inclusion
+- **Auto-Discovery**: Automatically scans installed plugins for documentation
+- **Beautiful Frontend**: Clean, responsive documentation interface inspired by Kirby Docs
+- **Markdown Processing**: Full markdown support with frontmatter, alerts, and code blocks
+- **Syntax Highlighting**: Enhanced code highlighting with Phiki integration
+- **Access Control**: Optional authentication to restrict documentation access
+- **Smart Caching**: Built-in caching for optimal performance
+- **Plugin Filtering**: Safelist specific plugins for documentation inclusion
 
 ## How It Works
 
@@ -58,7 +58,7 @@ Navigate to `/docs` in your Kirby site to view the generated documentation. You 
 
 - **Kirby CMS:** 4.6+
 - **PHP:** 8.3+
-- **Optional:** [Phiki](https://github.com/phiki/phiki) for enhanced syntax highlighting
+- **Optional:** [Phiki](https://github.com/phikiphp/phiki) for enhanced syntax highlighting
 
 ## Support
 
@@ -68,4 +68,4 @@ Navigate to `/docs` in your Kirby site to view the generated documentation. You 
 
 ## License
 
-[MIT License](LICENSE.md) - Created by [Justus Kraft](https://moinfra.me)
+[MIT License](LICENSE.md)
