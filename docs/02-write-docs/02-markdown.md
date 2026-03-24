@@ -17,9 +17,9 @@ description: A brief description of the page content
 
 The `description` field is used for meta tags on the generated page.
 
-## Relative Images
+## Images
 
-Relative images will be removed from the rendered documentation page. You can however use hosted images in your documentation pages.
+Relative images will be rewritten and served via a media route.
 
 ```markdown
 ![Alt text](https://example.com/image.png)
