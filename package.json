@@ -9,10 +9,10 @@
   "keywords": [],
   "author": "Justus Kraft <justus@moinfra.me>",
   "license": "MIT",
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@11.15.1",
   "devDependencies": {
-    "@release-it/bumper": "^7.0.5",
-    "@release-it/conventional-changelog": "^10.0.6",
-    "release-it": "^19.2.4"
+    "@release-it/bumper": "^7.0.6",
+    "@release-it/conventional-changelog": "^11.0.1",
+    "release-it": "^20.2.1"
   }
 }
