@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](///compare/v1.0.1...v1.1.0) (2026-07-21)
+
+### Features
+
+* update dependencies b53f28c
+
 ## [1.0.1](///compare/v1.0.0...v1.0.1) (2026-03-24)
 
 ## [1.0.0](///compare/v1.0.0-beta.5...v1.0.0) (2026-03-24)
